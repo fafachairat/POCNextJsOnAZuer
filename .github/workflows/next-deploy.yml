@@ -9,7 +9,7 @@ on:
 env:
   working-directory: .
   resource-group: rg-devops-student-fafa
-  app-service-name: medium-next-app-service-deploy
+  app-service-name: fafanextjs
  
 
 jobs:
