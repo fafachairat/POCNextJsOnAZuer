@@ -33,7 +33,18 @@ jobs:
           mv ./build/static ./build/standalone/static || echo "No static files found"
           mv ./public ./build/standalone/public || echo "No public files found"         
           ls -R build/standalone   || Check for build/standalone directory      
-      
+ 
+  deploy:
+    runs-on: ubuntu-latest   
+    steps:    
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.app-service-name }}
+          publish-profile: ${{ secrets.AZURE_APP_SERVICE_PUBLISH_PROFILE }}
+          package: build/standalone/build/standalone 
+          slot-name: production     
       # Step 5: Deploy to Azure Web App
       # - name: "Deploy to Azure Web App"
       #   id: deploy-to-webapp
