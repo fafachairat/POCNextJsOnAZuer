@@ -7,8 +7,10 @@ on:
   workflow_dispatch:
 
 env:
-  APPLICATION_PUBLISH_PROFILE: ${{ secrets.APP_PUBLISH_PROFILE }}
-  WEBAPP_NAME: "medium-next-app-service-deploy"
+  working-directory: .
+  resource-group: rg-devops-student-fafa
+  app-service-name: medium-next-app-service-deploy
+ 
 
 jobs:
   build:
@@ -36,7 +38,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: ${{ env.WEBAPP_NAME }}
-          slot-name: "Production"
-          publish-profile: ${{ env.APPLICATION_PUBLISH_PROFILE }}
+          app-name: ${{ env.app-service-name }}
+          publish-profile: ${{ secrets.AZURE_APP_SERVICE_PUBLISH_PROFILE }}
+          slot-name: production
           package: ./build/standalone
