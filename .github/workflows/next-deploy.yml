@@ -38,8 +38,8 @@ jobs:
           npm install
           npm run build
           mkdir -p ./build/standalone
-          mv ./build/static ./build/standalone/static
-          mv ./public ./build/standalone/public
+          mv ./build/static ./build/standalone/build
+          mv ./public ./build/standalone
 
       # Step 5: Deploy to Azure Web App
       - name: Deploy to Azure Web App
