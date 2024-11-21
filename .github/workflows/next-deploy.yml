@@ -33,7 +33,7 @@ jobs:
           mkdir -p ./build/standalone
           mv ./build/static ./build/standalone/static || echo "No static files found"
           mv ./public ./build/standalone/public || echo "No public files found"
-          ls -R        
+          ls -R build      
       
       # Step 5: Deploy to Azure Web App
      # - name: "Deploy to Azure Web App"
