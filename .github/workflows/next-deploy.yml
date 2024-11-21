@@ -33,7 +33,7 @@ jobs:
       # Step 4: Navigate to correct directory and install dependencies
       - name: Install dependencies and build Next.js app
         run: |
-          cd POCNextJsOnAZuer # Ensure this matches your directory structure
+          cd my-app # Ensure this matches your directory structure
           ls -la  # Confirm package.json exists here
           npm install
           npm run build
