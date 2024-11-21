@@ -41,4 +41,4 @@ jobs:
           app-name: ${{ env.app-service-name }}
           publish-profile: ${{ secrets.AZURE_APP_SERVICE_PUBLISH_PROFILE }}
           slot-name: production
-          package: ./build/standalone
+          package: .
