@@ -8,28 +8,30 @@ on:
 
 env:
   APPLICATION_PUBLISH_PROFILE: ${{ secrets.APP_PUBLISH_PROFILE }}
-  WEBAPP_NAME: "fafanextjs"
+  WEBAPP_NAME: "medium-next-app-service-deploy"
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+       # Step 1: Checkout repository
       - uses: actions/checkout@v4
-
+      # Step 2: Set up Node.js version
       - name: Set up Node.js version
         uses: actions/setup-node@v4
         with:
           node-version: "20.x"
-
-      - name: npm install, build, and test
+      # Step 4: Navigate to correct directory and install dependencies
+      - name: Install dependencies and build Next.js app
         run: |
-          cd POCNextJsOnAZuer
+          cd my-app # Ensure this matches your directory structure
           npm install
           npm run build
           mv ./build/static ./build/standalone/build
           mv ./public ./build/standalone
 
+      # Step 5: Deploy to Azure Web App
       - name: "Deploy to Azure Web App"
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
