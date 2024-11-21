@@ -33,17 +33,14 @@ jobs:
           mkdir -p ./build/standalone
           mv ./build/static ./build/standalone/static || echo "No static files found"
           mv ./public ./build/standalone/public || echo "No public files found"
-       
-      # Step 4.1: Debug build output
-      - name: Debug Build Output
-        run: |
-          ls -R build || echo "Build directory not found"
+          ls -R        
+      
       # Step 5: Deploy to Azure Web App
-      - name: "Deploy to Azure Web App"
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: ${{ env.app-service-name }}
-          publish-profile: ${{ secrets.AZURE_APP_SERVICE_PUBLISH_PROFILE }}
-          slot-name: production
-          package: ./build/standalone
+     # - name: "Deploy to Azure Web App"
+     #   id: deploy-to-webapp
+     #   uses: azure/webapps-deploy@v3
+     #   with:
+      #    app-name: ${{ env.app-service-name }}
+       #   publish-profile: ${{ secrets.AZURE_APP_SERVICE_PUBLISH_PROFILE }}
+       #   slot-name: production
+       #   package: ./build/standalone
