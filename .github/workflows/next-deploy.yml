@@ -25,14 +25,16 @@ jobs:
           node-version: "20.x"
 
       # Step 3: Debugging directory structure
-      #- name: Debug: Print working directory and files
-      #  run: |
-      #    pwd
-       #   ls -R
+      - name: Debug Directory Structure
+        run: |
+          pwd
+          ls -R
 
-      # Step 4: Install dependencies and build
+      # Step 4: Navigate to correct directory and install dependencies
       - name: Install dependencies and build Next.js app
-        run: |          
+        run: |
+          cd POCNextJsOnAZuer # Ensure this matches your directory structure
+          ls -la  # Confirm package.json exists here
           npm install
           npm run build
           mkdir -p ./build/standalone
@@ -46,4 +48,4 @@ jobs:
           app-name: ${{ env.WEBAPP_NAME }}
           slot-name: "Production"
           publish-profile: ${{ env.APPLICATION_PUBLISH_PROFILE }}
-          package: ./POCNextJsOnAZuer/POCNextJsOnAZuer/my-app/build/standalone
+          package: ./POCNextJsOnAZuer/build/standalone
