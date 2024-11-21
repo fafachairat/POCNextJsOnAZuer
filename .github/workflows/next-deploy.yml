@@ -15,26 +15,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout repository
       - uses: actions/checkout@v4
 
+      # Step 2: Set up Node.js version
       - name: Set up Node.js version
         uses: actions/setup-node@v4
         with:
           node-version: "20.x"
 
-      - name: npm install, build, and test
+      # Step 3: Debugging directory structure
+      #- name: Debug: Print working directory and files
+      #  run: |
+      #    pwd
+       #   ls -R
+
+      # Step 4: Install dependencies and build
+      - name: Install dependencies and build Next.js app
         run: |
           cd POCNextJsOnAZuer
           npm install
           npm run build
-          mv ./build/static ./build/standalone/build
-          mv ./public ./build/standalone
+          mkdir -p ./build/standalone
+          mv ./build/static ./build/standalone/static
+          mv ./public ./build/standalone/public
 
-      - name: "Deploy to Azure Web App"
-        id: deploy-to-webapp
+      # Step 5: Deploy to Azure Web App
+      - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: ${{ env.WEBAPP_NAME }}
           slot-name: "Production"
           publish-profile: ${{ env.APPLICATION_PUBLISH_PROFILE }}
-          package: ./build/standalone
+          package: ./POCNextJsOnAZuer/build/standalone
