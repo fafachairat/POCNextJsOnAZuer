@@ -31,9 +31,8 @@ jobs:
           npm install
           npm run build          
           mv ./build/static ./build/standalone/static || echo "No static files found"
-          mv ./public ./build/standalone/public || echo "No public files found"
-          ls -R .next  # Check for .next directory
-          ls -R build/standalone  # Check for build/standalone directory      
+          mv ./public ./build/standalone/public || echo "No public files found"         
+          ls -R build/standalone   || Check for build/standalone directory      
       
       # Step 5: Deploy to Azure Web App
       # - name: "Deploy to Azure Web App"
