@@ -30,9 +30,14 @@ jobs:
           cd my-app # Ensure this matches your directory structure
           npm install
           npm run build
-          mv ./build/static ./build/standalone/build
-          mv ./public ./build/standalone
-
+          mkdir -p ./build/standalone
+          mv ./build/static ./build/standalone/static || echo "No static files found"
+          mv ./public ./build/standalone/public || echo "No public files found"
+       
+      # Step 4.1: Debug build output
+      - name: Debug Build Output
+        run: |
+          ls -R ./build
       # Step 5: Deploy to Azure Web App
       - name: "Deploy to Azure Web App"
         id: deploy-to-webapp
@@ -41,4 +46,4 @@ jobs:
           app-name: ${{ env.app-service-name }}
           publish-profile: ${{ secrets.AZURE_APP_SERVICE_PUBLISH_PROFILE }}
           slot-name: production
-          package: .
+          package: ./build/standalone
