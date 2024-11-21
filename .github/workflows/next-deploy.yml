@@ -36,6 +36,7 @@ jobs:
  
   deploy:
     runs-on: ubuntu-latest   
+    needs: build
     steps:    
 
       - name: Deploy to Azure Web App
@@ -43,7 +44,7 @@ jobs:
         with:
           app-name: ${{ env.app-service-name }}
           publish-profile: ${{ secrets.AZURE_APP_SERVICE_PUBLISH_PROFILE }}
-          package: build/standalone/build/standalone 
+          package: build/standalone
           slot-name: production     
       # Step 5: Deploy to Azure Web App
       # - name: "Deploy to Azure Web App"
