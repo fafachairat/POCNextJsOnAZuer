@@ -37,7 +37,7 @@ jobs:
       # Step 4.1: Debug build output
       - name: Debug Build Output
         run: |
-          ls -R ./build
+          ls -R build || echo "Build directory not found"
       # Step 5: Deploy to Azure Web App
       - name: "Deploy to Azure Web App"
         id: deploy-to-webapp
