@@ -29,8 +29,7 @@ jobs:
         run: |
           cd my-app # Ensure this matches your directory structure
           npm install
-          npm run build
-          mkdir -p ./build/standalone
+          npm run build          
           mv ./build/static ./build/standalone/static || echo "No static files found"
           mv ./public ./build/standalone/public || echo "No public files found"
           ls -R build      
