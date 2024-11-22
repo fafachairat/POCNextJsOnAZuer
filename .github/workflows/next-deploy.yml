@@ -26,32 +26,19 @@ jobs:
           node-version: "20.x"
       # Step 4: Navigate to correct directory and install dependencies
       - name: Install dependencies and build Next.js app
-        run: |
-          cd my-app # Ensure this matches your directory structure
+        run: |          
           npm install
           npm run build          
-          mv ./build/static ./build/standalone/static || echo "No static files found"
-          mv ./public ./build/standalone/public || echo "No public files found"         
-          ls -R build/standalone   || Check for build/standalone directory      
- 
-  deploy:
-    runs-on: ubuntu-latest   
-    needs: build
-    steps:    
-
-      - name: Deploy to Azure Web App
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: ${{ env.app-service-name }}
-          publish-profile: ${{ secrets.AZURE_APP_SERVICE_PUBLISH_PROFILE }}
-          package: build/standalone
-          slot-name: production     
+          mv ./build/static ./build/standalone/build
+          mv ./public ./build/standalone
+          ls -R build      
+      
       # Step 5: Deploy to Azure Web App
-      # - name: "Deploy to Azure Web App"
-      #   id: deploy-to-webapp
-      #   uses: azure/webapps-deploy@v3
-      #   with:
-      #    app-name: ${{ env.app-service-name }}
-      #    publish-profile: ${{ secrets.AZURE_APP_SERVICE_PUBLISH_PROFILE }}
-      #    slot-name: production
-      #    package: build/standalone
+      - name: "Deploy to Azure Web App"
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+         app-name: ${{ env.app-service-name }}
+         publish-profile: ${{ secrets.AZURE_APP_SERVICE_PUBLISH_PROFILE }}
+         slot-name: production
+         package: ./build/standalone
